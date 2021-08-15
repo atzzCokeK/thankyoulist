@@ -1,16 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import Card from "./components/Card";
-import sampleDate from "./sampleData";
 import sampleData from "./sampleData";
+import Header from "./components/Header";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Login from "./components/Login";
+import Top from "./components/Top";
 
 function App() {
-  const cards =
-    sampleData.map((data) => <Card createdAt={data.createdAt} content={data.content}/> )
+  const [thankYous,setThankYous] = useState(sampleData)
+
+  const handleDeleted = (id:number) => {
+    //配列から該当のidのthank youを削除
+    const nextThankYous = thankYous.filter((thankYou) => thankYou.id !== id )
+    setThankYous(nextThankYous)
+  }
+
+  const viewCards =
+    thankYous.map((data) => <Card id={data.id}createdAt={data.createdAt} content={data.content} onDeleted={handleDeleted} /> )
+
   return (
-    <div className="App">
-      {cards}
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path={"/login"} component={Login}/>
+        <Route exact path={"/top"} component={Top}/>
+
+      </Switch>
+
+    </Router>
   );
 }
 
