@@ -2,7 +2,7 @@ import UserProfile from "./UserProfile";
 
 const Header = () => {
   return (
-    <UserProfile name={"hoge"}/>
+    <UserProfile name={"Header"}/>
   )
 }
 

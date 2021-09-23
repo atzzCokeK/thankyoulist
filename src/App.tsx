@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Login from "./components/Login";
 import Top from "./components/Top";
+import {fbdb, firebaseApp} from "./Firebase";
 
 function App() {
   const [thankYous,setThankYous] = useState(sampleData)
@@ -19,12 +20,12 @@ function App() {
   const viewCards =
     thankYous.map((data) => <Card id={data.id}createdAt={data.createdAt} content={data.content} onDeleted={handleDeleted} /> )
 
+
   return (
     <Router>
       <Switch>
         <Route exact path={"/login"} component={Login}/>
         <Route exact path={"/top"} component={Top}/>
-
       </Switch>
 
     </Router>
